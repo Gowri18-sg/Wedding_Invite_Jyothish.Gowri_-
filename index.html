@@ -367,7 +367,7 @@
     </div>
 
     <div id="main-content">
-        <p class="header-title">TOGETHER WITH THEIR FAMILIES</p>
+        <p class="header-title">TOGETHER WITH OUR FAMILIES</p>
         
         <div class="couple-pic-container">
             <img src="pngtree-traditional-south-indian-wedding-couple-cute-cartoon-bride-and-groom-png-image_15745832.png" alt="Wedding Couple Portrait">
@@ -378,7 +378,7 @@
         <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin: 20px 0; background: #ffffff; padding: 15px 10px; border-radius: 12px; border: 1px solid #eee; box-shadow: 0 2px 8px rgba(0,0,0,0.03); text-align: center;">
             
             <div style="flex: 1;">
-                <strong style="color: var(--primary-color); font-family: 'Cinzel', serif; font-size: 15px; display: block; margin-bottom: 4px;">GROOM</strong>
+                <strong style="color: var(--primary-color); font-family: 'Cinzel', serif; font-size: 15px; display: block; margin-bottom: 4px;"></strong>
                 <p style="font-size: 11px; color: #555; line-height: 1.4; margin: 0;">
                     S/o Suresh Kumar (Late)<br>& Radhamani S<br><br>
                     Vishnu Bhavan,<br>Kachani,<br>Karakulam.P.O<br>
@@ -389,7 +389,7 @@
             <div style="font-family: 'Cinzel', serif; font-size: 18px; color: var(--gold-color); font-weight: bold; align-self: center; padding: 0 2px;">&</div>
 
             <div style="flex: 1;">
-                <strong style="color: var(--primary-color); font-family: 'Cinzel', serif; font-size: 15px; display: block; margin-bottom: 4px;">BRIDE</strong>
+                <strong style="color: var(--primary-color); font-family: 'Cinzel', serif; font-size: 15px; display: block; margin-bottom: 4px;"></strong>
                 <p style="font-size: 11px; color: #555; line-height: 1.4; margin: 0;">
                     D/o Sabu S S<br>& Girija S<br><br>
                     Gowreesankaram,<br>Manikandeswaram.P.O,<br>Trivandrum<br>
@@ -401,7 +401,7 @@
 
 
         <p style="font-size: 14px; font-style: italic; margin-bottom: 5px;">Mark your calendar For Our Wedding</p>
-        <div class="date-highlight">11 NOVEMBER 2026, Wednesday</div>
+        <div class="date-highlight">NOVEMBER 11 2026, Wednesday</div>
 
         <div class="countdown-container">
             <div class="countdown-title">Counting Down To The Muhurtham</div>
@@ -425,7 +425,7 @@
             
             <p style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px; font-style: italic;">
                 Followed by lunch at:<br>
-                <strong>Sree Krishna Residency</strong>, East Nada, Guruvayur.
+                <strong>Sree Krishna Residency</strong>, West Nada, Guruvayur.
             </p>
             <a href="https://maps.google.com/?q=Sree+Krishna+Residency+Guruvayur" target="_blank" class="btn-maps">📍 VIEW LUNCH VENUE</a>
         </div>
@@ -435,7 +435,7 @@
             <p><strong>Date:</strong> November 15, 2026 (Sunday)</p>
             <p><strong>Time:</strong> From 5'O Clock onwards</p>
             <p><strong>Location:</strong> CLC Church Hall, Peroorkada</p>
-            <a href="https://maps.google.com/?q=ABC+Convention+Centre+Trivandrum" target="_blank" class="btn-maps">📍 VIEW ON MAP</a>
+            <a href="https://maps.app.goo.gl/jMqDHxTVgp2nVjnm6" target="_blank" class="btn-maps">📍 VIEW ON MAP</a>
         </div>
 
         <div class="rivalry-container">
@@ -516,30 +516,38 @@
             }
         }
 
-        // Send RSVP via WhatsApp Logic
-        function sendRSVP(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('guest-name').value;
-            const attendance = document.getElementById('attendance').value;
-            const guests = document.getElementById('num-guests').value;
-            
-            let teamSelection = selectedTeamName ? selectedTeamName : "No team selected yet";
+  /<script>
+    // Google sheet 
+    const GOOGLE_SCRIPT_URL = "https://docs.google.com/spreadsheets/d/1NItdbBacZYOD4xusjYVP5pxAPO8NP_GT8-BI3gKke5c/edit?usp=drivesdk";
 
-            // Crafting the WhatsApp Message
-            const message = `*Wedding RSVP Response* ✉️%0A%0A` +
-                            `👤 *Name:* ${name}%0A` +
-                            `✅ *Attending:* ${attendance}%0A` +
-                            `👥 *Guests:* ${guests}%0A` +
-                            `🎉 *Cheering For:* ${teamSelection}`;
-
-            // Replace with your personal phone number with country code (e.g., 919876543210 for India)
-            const myPhoneNumber = "910000000000"; // -> Add your WhatsApp Number here
-
-            // Redirecting to WhatsApp
-            window.open(`https://api.whatsapp.org/whatsapp://send?phone=${myPhoneNumber}&text=${message}`, '_blank');
+    function selectTeam(team) {
+        const statusMsg = document.getElementById('selection-status');
+        const brideBtn = document.getElementById('bride-team');
+        const groomBtn = document.getElementById('groom-team');
+        
+        if(team === 'bride') {
+            brideBtn.style.transform = 'scale(1.05)';
+            brideBtn.style.borderColor = '#d4af37';
+            brideBtn.style.backgroundColor = '#ffe4e1';
+            groomBtn.style.opacity = '0.5';
+            groomBtn.style.transform = 'scale(1)';
+            statusMsg.innerText = "Yay! You joined Team Bride 🌸";
+        } else {
+            groomBtn.style.transform = 'scale(1.05)';
+            groomBtn.style.borderColor = '#d4af37';
+            groomBtn.style.backgroundColor = '#e0f7fa';
+            brideBtn.style.opacity = '0.5';
+            brideBtn.style.transform = 'scale(1)';
+            statusMsg.innerText = "Awesome! You joined Team Groom 👑";
         }
-    </script>
+        
+        // Send Vote to Google Sheet
+        fetch(`${GOOGLE_SCRIPT_URL}?team=${team === 'bride' ? 'Team Bride (Gowri)' : 'Team Groom (Jyothish)'}`)
+        .then(response => console.log('Vote recorded!'))
+        .catch(error => console.error('Error!', error.message));
+    }
+</script>
+    
 </body>
 </html>
 
