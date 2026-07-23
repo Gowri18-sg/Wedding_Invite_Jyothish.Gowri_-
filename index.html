@@ -458,96 +458,85 @@
     </div>
 
     <script>
-        // Function to open the invitation
-        function openInvitation() {
-            const env = document.getElementById('envelope-screen');
-            const main = document.getElementById('main-content');
-            
-            // Slide up animation for envelope
-            env.style.transform = 'translateY(-100%)';
-            
-            // Fade in main content
+    // Function to open the invitation
+    function openInvitation() {
+        const env = document.getElementById('envelope-screen');
+        const main = document.getElementById('main-content');
+
+        // Slide up animation for envelope
+        if (env) env.style.transform = 'translateY(-100%)';
+
+        // Fade in main content
+        if (main) {
             main.style.opacity = '1';
             document.body.style.overflowY = 'auto';
         }
+    }
 
-        // Countdown Timer Logic
-        const targetDate = new Date("November 11, 2026 09:30:00").getTime();
+    // Countdown Timer Logic
+    const targetDate = new Date("November 11, 2026 09:30:00").getTime();
 
-        const timerInterval = setInterval(function() {
-            const now = new Date().getTime();
-            const difference = targetDate - now;
+    const timerInterval = setInterval(function() {
+        const now = new Date().getTime();
+        const difference = targetDate - now;
 
-            if (difference < 0) {
-                clearInterval(timerInterval);
+        if (difference < 0) {
+            clearInterval(timerInterval);
+            if (document.querySelector(".countdown-container")) {
                 document.querySelector(".countdown-container").style.display = "none";
-                return;
             }
-
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60 * 1000)) / 1000);
-
-            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-            document.getElementById("mins").innerText = minutes < 10 ? "0" + minutes : minutes;
-            document.getElementById("secs").innerText = seconds < 10 ? "0" + seconds : seconds;
-        }, 1000);
-
-        // Team Selection Logic
-        let selectedTeamName = "";
-
-        function selectTeam(team) {
-            const brideBtn = document.getElementById('bride-team');
-            const groomBtn = document.getElementById('groom-team');
-            const statusMsg = document.getElementById('selection-status');
-
-            if (team === 'bride') {
-                brideBtn.classList.add('selected-bride');
-                groomBtn.classList.remove('selected-groom');
-                statusMsg.innerHTML = "🌸 You're cheering for Team Gowri! ✨";
-                selectedTeamName = "Team Bride (Gowri)";
-            } else {
-                groomBtn.classList.add('selected-groom');
-                brideBtn.classList.remove('selected-bride');
-                statusMsg.innerHTML = "👑 You're cheering for Team Jyothish! ✨";
-                selectedTeamName = "Team Groom (Jyothish)";
-            }
+            return;
         }
 
-  /<script>
-    // Google sheet 
-    const GOOGLE_SCRIPT_URL = "https://docs.google.com/spreadsheets/d/1NItdbBacZYOD4xusjYVP5pxAPO8NP_GT8-BI3gKke5c/edit?usp=drivesdk";
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
+        if (document.getElementById("days")) document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+        if (document.getElementById("hours")) document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+        if (document.getElementById("mins")) document.getElementById("mins").innerText = minutes < 10 ? "0" + minutes : minutes;
+        if (document.getElementById("secs")) document.getElementById("secs").innerText = seconds < 10 ? "0" + seconds : seconds;
+    }, 1000);
+
+    // 👇 PASTE YOUR APPS SCRIPT WEB APP URL HERE (https://script.google.com/macros/s/...)
+    const GOOGLE_SCRIPT_URL = "PASTE_YOUR_WEB_APP_URL_HERE";
+
+    // Team Selection Logic
     function selectTeam(team) {
         const statusMsg = document.getElementById('selection-status');
         const brideBtn = document.getElementById('bride-team');
         const groomBtn = document.getElementById('groom-team');
-        
-        if(team === 'bride') {
-            brideBtn.style.transform = 'scale(1.05)';
-            brideBtn.style.borderColor = '#d4af37';
-            brideBtn.style.backgroundColor = '#ffe4e1';
-            groomBtn.style.opacity = '0.5';
-            groomBtn.style.transform = 'scale(1)';
-            statusMsg.innerText = "Yay! You joined Team Bride 🌸";
+
+        if (team === 'bride') {
+            if (brideBtn) {
+                brideBtn.style.transform = 'scale(1.05)';
+                brideBtn.style.borderColor = '#d4af37';
+                brideBtn.style.backgroundColor = '#ffe4e1';
+            }
+            if (groomBtn) {
+                groomBtn.style.opacity = '0.5';
+                groomBtn.style.transform = 'scale(1)';
+            }
+            if (statusMsg) statusMsg.innerText = "Yay! You joined Team Bride 🌸";
         } else {
-            groomBtn.style.transform = 'scale(1.05)';
-            groomBtn.style.borderColor = '#d4af37';
-            groomBtn.style.backgroundColor = '#e0f7fa';
-            brideBtn.style.opacity = '0.5';
-            brideBtn.style.transform = 'scale(1)';
-            statusMsg.innerText = "Awesome! You joined Team Groom 👑";
+            if (groomBtn) {
+                groomBtn.style.transform = 'scale(1.05)';
+                groomBtn.style.borderColor = '#d4af37';
+                groomBtn.style.backgroundColor = '#e0f7fa';
+            }
+            if (brideBtn) {
+                brideBtn.style.opacity = '0.5';
+                brideBtn.style.transform = 'scale(1)';
+            }
+            if (statusMsg) statusMsg.innerText = "Awesome! You joined Team Groom 👑";
         }
-        
-        // Send Vote to Google Sheet
-        fetch(`${GOOGLE_SCRIPT_URL}?team=${team === 'bride' ? 'Team Bride (Gowri)' : 'Team Groom (Jyothish)'}`)
-        .then(response => console.log('Vote recorded!'))
-        .catch(error => console.error('Error!', error.message));
+
+        // Send Vote to Google Sheet (Only if URL is provided)
+        if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== "PASTE_YOUR_WEB_APP_URL_HERE") {
+            fetch(`${GOOGLE_SCRIPT_URL}?team=${team === 'bride' ? 'Team Bride (Gowri)' : 'Team Groom (Jyothish)'}`)
+                .then(response => console.log('Vote recorded!'))
+                .catch(error => console.error('Error!', error.message));
+        }
     }
 </script>
-    
-</body>
-</html>
-
